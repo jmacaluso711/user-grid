@@ -66,8 +66,9 @@ class Login extends Component {
 
   state = {
     redirectToUsers: false,
-    isValid: {},
-    errors: {}
+    emailError: '',
+    passwordError: '',
+    accessError: ''
   }
 
   storeSession = () => {
@@ -75,26 +76,63 @@ class Login extends Component {
     sessionStorage.setItem('session', timestamp);
   }
 
+  validate = (formData) => {
+    let isError = false;
+    const errors = {};
+    const passwordRegex = new RegExp(/^.*(?=.{10,})(?=.*[a-z])(?=.*[!@#$%^&*-]).*/);
+
+    if (formData.email.indexOf('@') === -1) {
+      isError = true;
+      errors.emailError = 'Email must contain @ symbol.';
+    } else {
+      errors.emailError = '';
+    }
+
+    if (!formData.password.match(passwordRegex)) {
+      isError = true;
+      errors.passwordError = 'Password must be at leaset 10 characters and contain 1 special character.'
+    } else {
+      errors.passwordError = '';
+    }
+
+    if (formData.email !== testUser.email && formData.password !== testUser.password) {
+      isError = true;
+      errors.accessError = 'Access Denied';
+    } else {
+      errors.accessError = '';
+    }
+
+    if(isError) {
+      this.setState({
+        ...this.state,
+        ...errors
+      })
+    }
+
+    return isError;
+  }
+
   login = () => {
-    
     let formData = {
       email: this.email.value,
       password: this.password.value,
     };
+    const error = this.validate(formData);
 
-    if (formData.email === testUser.email && formData.password === testUser.password) {
-      this.storeSession();
-      testAuth.authenticate(() => {
-        this.setState({
-          redirectToUsers: true
+    if(!error) {
+      if (formData.email === testUser.email && formData.password === testUser.password) {
+        this.storeSession();
+        testAuth.authenticate(() => {
+          this.setState({
+            redirectToUsers: true
+          })
         })
-      })
-    } else {
-      const errors = this.state.errors;
-      errors.accessDenied = true;
+      }
       this.setState({
-        errors
-      })
+        emailError: '',
+        passwordError: '',
+        accessError: ''
+      });
     }
   }
 
@@ -105,35 +143,7 @@ class Login extends Component {
 
   render() {
 
-    const { redirectToUsers, errors } = this.state;
-
-    const denied = (
-      <div>Access Denied</div>
-    );
-
-    const form = (
-      <form onSubmit={(e) => this.handleSubmit(e)}>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            ref={(input) => this.email = input}
-            type="email"
-            name="email"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            ref={(input) => this.password = input}
-            type="password"
-            name="password"
-            pattern=".{10,}"
-            required
-          />
-        </div>
-        <button>Login</button>
-      </form>
-    )
+    const { redirectToUsers, emailError, passwordError, accessError } = this.state;
 
     if (redirectToUsers === true) {
       return <Redirect to='/users' />
@@ -142,8 +152,28 @@ class Login extends Component {
     return (
       <div>
         <h1>Login</h1>
-        {errors.accessDenied ? denied : null}
-        {form}
+        {accessError ? <span className="form-error">{accessError}</span> : null}
+        <form onSubmit={(e) => this.handleSubmit(e)} noValidate>
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              ref={(input) => this.email = input}
+              type="email"
+              name="email"
+            />
+            {emailError ? <span className="form-error">{emailError}</span> : null}
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              ref={(input) => this.password = input}
+              type="password"
+              name="password"
+            />
+            {passwordError ? <span className="form-error">{passwordError}</span> : null}
+          </div>
+          <button>Login</button>
+        </form>
       </div>
     )
   }
