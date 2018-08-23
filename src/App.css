@@ -110,20 +110,20 @@ body {
   border: 3px solid #000;
 }
 
-.user.cat1 {
+.user-priority--1 {
   background-color: orange;
 }
 
-.user.cat2 {
+.user-priority--2 {
   background-color: palegreen;
 }
 
-.user.cat3 {
+.user-priority--3 {
   background-color: lightblue;
 }
 
-.user.cat4 {
-  background-color: purple;
+.user-priority--4 {
+  background-color: plum;
 }
 
 .user-title {
