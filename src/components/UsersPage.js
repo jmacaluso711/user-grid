@@ -15,40 +15,41 @@ export default class UsersPage extends Component {
   }
 
   sortBy = (e) => {
-    let users = Object.assign({}, this.state.users);
-    let sortedUsers;
+    // Make a copy of state 
+    let users = [...this.state.users.data];
+    let sortedUsers = [];
 
     switch(e.target.value) {
       case 'asc':
-        sortedUsers = users.data.sort((a, b) => {
+        sortedUsers.data = users.sort((a, b) => {
           return a.name > b.name ? 1 : -1;
         });
         break;
       case 'desc':
-        sortedUsers = users.data.sort((a, b) => {
+        sortedUsers.data = users.sort((a, b) => {
           return a.name > b.name ? -1 : 1;
         });
         break;
       case 'priority':
-        sortedUsers = users.data.sort((a, b) => {
+        sortedUsers.data = users.sort((a, b) => {
           return a.priority > b.priority ? 1 : -1;
         })
         break;
       case 'featured':
-        sortedUsers = users.data;
+        sortedUsers.data = sampleUsers.data;
         break;
       default:
         return null;
     }
 
-    users.data = sortedUsers;
-    this.setState({users});
+    this.setState({ 
+      users: sortedUsers 
+    });
   }
 
   render() {
     const { category, users } = this.state;
-    const featuredUsers = users.data.map((user, i) => <User key={i} user={user} />);
-    let userList = featuredUsers;
+    let userList = users.data.map((user, i) => <User key={i} user={user} />);
 
     if (category) {
       const usersCategory = users.data.filter(user => user.category === category);
@@ -60,6 +61,12 @@ export default class UsersPage extends Component {
         <header>
           <h1>Users Grid</h1>
           <div className="filters">
+            <div className="filter-radio">
+              <label>
+                <input type="radio" name="category" value="all" onChange={(e) => this.filterBy(e)} />
+                All
+              </label>
+            </div>
             <div className="filter-radio">
               <label>
                 <input type="radio" name="category" value="cat1" onChange={(e) => this.filterBy(e)}/>
