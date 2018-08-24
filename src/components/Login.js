@@ -34,12 +34,14 @@ export default class Login extends Component {
       errors.passwordError = '';
     }
 
-    if (formData.email !== testUser.email && formData.password !== testUser.password) {
+    if (formData.email !== testUser.email || formData.password !== testUser.password) {
       isError = true;
       errors.accessError = 'Access Denied';
     } else {
       errors.accessError = '';
     }
+
+    console.log(errors);
 
     if (isError) {
       this.setState({

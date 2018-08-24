@@ -62,13 +62,15 @@ export default class UsersPage extends Component {
       <section className="users-page">
         <header>
           <h1>Users Grid</h1>
-          <div className="filter-and-sort">
-            <Filters filterBy={(e) => this.filterBy(e)} />
+          <div className="sort-wrapper">
             <Sorts sortBy={(e) => this.sortBy(e)} />
           </div>
         </header>
-        <div className="users-grid">
-          {userList}
+        <div className="user-grid-wrapper">
+          <Filters filterBy={(e) => this.filterBy(e)} />
+          <div className="users-grid">
+            {userList}
+          </div>
         </div>
       </section>
     )
