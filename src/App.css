@@ -95,6 +95,8 @@ body {
   margin-bottom: 2rem;
   padding: 1rem;
   background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
 }
 
 .users-grid {
@@ -144,6 +146,45 @@ body {
 }
 
 /*
+  Filter and sort
+*/
+.filter-and-sort {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 1rem;
+}
+
+.filters {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.filter-radio {
+  margin-right: 1.5rem;
+}
+
+.filter-radio label {
+  font-size: .875rem;
+  font-weight: bold;
+  display: inline-block;
+  padding: .5rem;
+  background-color: #c3c3c3;
+  cursor: pointer;
+}
+
+.filter-radio input:checked ~ label {
+  color: #fff;
+  background-color: #333;
+}
+
+.filter-radio input {
+  display: none;
+  margin-right: .5rem;
+}
+
+
+/*
   Media Queries
 */
 @media only screen and (min-width: 768px) {
@@ -151,8 +192,24 @@ body {
     flex-flow: wrap;
     flex-direction: row;
   }
+  
   .user {
     width: calc(33.33% - 2rem);
     margin: 1rem;
+  }
+
+  .users-page header {
+    flex-direction: row;
+  }
+
+  .filter-and-sort {
+    flex-direction: row;
+    align-items: center;
+    margin-top: 0;
+    margin-left: auto;
+  }
+
+  .filters {
+    margin-bottom: 0;
   }
 }
