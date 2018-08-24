@@ -9,7 +9,7 @@ export default class UsersPage extends Component {
   }
 
   sortBy = (e) => {
-    // Make a copy of state 
+    // Make a copy of state
     let users = [...this.state.users.data];
     let sortedUsers = [];
 
@@ -48,12 +48,12 @@ export default class UsersPage extends Component {
   }
 
   render() {
-    const { category, users } = this.state;
+    const { users, category } = this.state;
     let userList = users.data.map((user, i) => <User key={i} user={user} />);
-    
+
     if (category) {
       const usersCategory = users.data.filter(user => user.category === category);
-      userList = usersCategory.map((user, i) => <User key={i} user={user} />);;
+      userList = usersCategory.map((user, i) => <User key={i} user={user} />);
     }
 
     return (
