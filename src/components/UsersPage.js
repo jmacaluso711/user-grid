@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import User from './User';
 import sampleUsers from '../sample-users';
+import Filters from './Filters';
+import Sorts from './Sorts';
 
 export default class UsersPage extends Component {
   state = {
@@ -61,34 +63,8 @@ export default class UsersPage extends Component {
         <header>
           <h1>Users Grid</h1>
           <div className="filter-and-sort">
-            <div className="filters">
-              <div className="filter-radio">
-                <input id="cat1" type="radio" name="category" value="cat1" onChange={(e) => this.filterBy(e)}/>
-                <label htmlFor="cat1">
-                  Category 1
-                </label>
-              </div> 
-              <div className="filter-radio">
-                <input id="cat2" type="radio" name="category" value="cat2" onChange={(e) => this.filterBy(e)} />
-                <label htmlFor="cat2">
-                  Category 2
-                </label>
-              </div> 
-              <div className="filter-radio">
-                <input id="cat3" type="radio" name="category" value="cat3" onChange={(e) => this.filterBy(e)} />
-                <label htmlFor="cat3">
-                  Category 3
-                </label>
-              </div>
-            </div>
-            <div className="sorts">
-              <select onChange={(e) => this.sortBy(e)}> 
-                <option value="featured">Featured</option>
-                <option value="asc">Sort A-Z</option>
-                <option value="desc">Sort Z-A</option>
-                <option value="priority">Sort by Priority</option>
-              </select>
-            </div>
+            <Filters filterBy={(e) => this.filterBy(e)} />
+            <Sorts sortBy={(e) => this.sortBy(e)} />
           </div>
         </header>
         <div className="users-grid">
