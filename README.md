@@ -1,3 +1,28 @@
+# Zola Tech Assessment
+
+Thanks for the opportunity to complete the tech assessment. I enjoyed working through the tasks. Being that I don't use React on a day to day basis this was a good learning experience for me.
+
+## Quick Start
+
+```
+  1. clone this repo
+  2. npm install
+  3. npm start
+```
+
+The site will open at `localhost:3000`.
+
+## Notes
+
+- Authentication is faked using an auth function along with a Protected route.
+- The session is store using `sessionStorage`
+- CSS: Ideally I would have used `styled-components` but for the sake of this exercise they are done globally.
+- Light design pass pulling some color inspiration from your website.
+
+I look forward to hearing any feedback! Let me know if you have any trouble getting the repo up an running.
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
