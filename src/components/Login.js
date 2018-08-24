@@ -41,8 +41,6 @@ export default class Login extends Component {
       errors.accessError = '';
     }
 
-    console.log(errors);
-
     if (isError) {
       this.setState({
         ...this.state,
