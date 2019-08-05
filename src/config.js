@@ -1,7 +1,7 @@
 
 export const testUser = {
-  email: "test@zola.com",
-  password: "zola#frontend"
+  email: "test@test.com",
+  password: "test#frontend"
 }
 
 export const testAuth = {
