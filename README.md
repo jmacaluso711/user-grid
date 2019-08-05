@@ -2,7 +2,7 @@
 
 ```
   1. clone this repo
-  2. npm install
+  2. npm install (npm 12.4.0)
   3. npm start
 ```
 
@@ -10,8 +10,10 @@ The site will open at `localhost:3000`.
 
 ## Login
 
-email: "test@test.com"
-password: "test#frontend"
+```
+email: test@test.com
+password: test#frontend
+```
 
 ## Notes
 
