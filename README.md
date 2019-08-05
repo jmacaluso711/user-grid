@@ -8,6 +8,11 @@
 
 The site will open at `localhost:3000`.
 
+## Login
+
+email: "test@test.com"
+password: "test#frontend"
+
 ## Notes
 
 - Authentication is faked using an auth function along with a Protected route.
